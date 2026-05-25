@@ -1,0 +1,164 @@
+/* src/styles/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── CSS Variables ─────────────────────────────────────────────────────── */
+:root {
+  --bg-primary:     #faf8f4;
+  --bg-secondary:   #f0ece4;
+  --bg-tertiary:    #e8e2d8;
+  --text-primary:   #1a1714;
+  --text-secondary: #57493d;
+  --text-muted:     #8c7660;
+  --border-color:   #d6ccbf;
+  --sidebar-bg:     #f0ece4;
+  --toolbar-bg:     #faf8f4;
+  --card-bg:        #ffffff;
+  --shadow:         0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md:      0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+}
+
+.dark {
+  --bg-primary:     #1a1714;
+  --bg-secondary:   #221f1b;
+  --bg-tertiary:    #2a2520;
+  --text-primary:   #ebe7df;
+  --text-secondary: #bfaf9d;
+  --text-muted:     #705e4d;
+  --border-color:   #3d342c;
+  --sidebar-bg:     #1e1b17;
+  --toolbar-bg:     #1a1714;
+  --card-bg:        #221f1b;
+  --shadow:         0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
+  --shadow-md:      0 4px 12px rgba(0,0,0,0.3), 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.sepia {
+  --bg-primary:     #f5edd9;
+  --bg-secondary:   #ede3c7;
+  --bg-tertiary:    #e0d4b0;
+  --text-primary:   #2c1f0e;
+  --text-secondary: #5c4020;
+  --text-muted:     #8b6840;
+  --border-color:   #c8b080;
+  --sidebar-bg:     #ede3c7;
+  --toolbar-bg:     #f5edd9;
+  --card-bg:        #faf3e0;
+  --shadow:         0 1px 3px rgba(100,70,20,0.12);
+  --shadow-md:      0 4px 12px rgba(100,70,20,0.1);
+}
+
+/* ── Base ──────────────────────────────────────────────────────────────── */
+* { box-sizing: border-box; }
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'DM Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+/* ── PDF Viewer ────────────────────────────────────────────────────────── */
+.react-pdf__Page {
+  position: relative !important;
+  margin-bottom: 16px;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.react-pdf__Page__canvas {
+  display: block !important;
+}
+
+.react-pdf__Page__textContent {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  user-select: text;
+  pointer-events: all;
+}
+
+.react-pdf__Page__textContent span {
+  cursor: text;
+  color: transparent;
+  position: absolute;
+  white-space: pre;
+  transform-origin: left bottom;
+}
+
+/* ── Highlight Layers ──────────────────────────────────────────────────── */
+.annotation-layer {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+}
+
+.highlight-mark {
+  position: absolute;
+  cursor: pointer;
+  pointer-events: all;
+  border-radius: 2px;
+  transition: opacity 0.15s ease;
+  mix-blend-mode: multiply;
+}
+
+.dark .highlight-mark {
+  mix-blend-mode: screen;
+  opacity: 0.5;
+}
+
+.highlight-mark:hover { opacity: 0.85 !important; }
+.highlight-mark.selected { outline: 2px solid var(--text-secondary); outline-offset: 1px; }
+
+.underline-mark {
+  position: absolute;
+  cursor: pointer;
+  pointer-events: all;
+  border-bottom: 2px solid;
+  background: transparent !important;
+}
+
+/* ── Floating Toolbar ──────────────────────────────────────────────────── */
+.floating-toolbar {
+  position: fixed;
+  z-index: 100;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 6px 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  box-shadow: var(--shadow-md);
+  animation: slideUp 0.15s ease-out;
+}
+
+/* ── Utility ───────────────────────────────────────────────────────────── */
+.text-muted   { color: var(--text-muted); }
+.text-secondary { color: var(--text-secondary); }
+.border-theme { border-color: var(--border-color); }
+.bg-primary   { background: var(--bg-primary); }
+.bg-secondary { background: var(--bg-secondary); }
+.bg-card      { background: var(--card-bg); }
